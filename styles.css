@@ -1,0 +1,27 @@
+
+body{
+    background: black;
+}
+.grid{
+    border: 2px solid black;
+    height: 500px;
+    width: 500px;
+    display:grid;
+    grid-template-columns: auto auto auto auto auto  auto auto auto auto auto ;
+    background: grey;
+    border-radius: 10px;
+}
+
+.block{
+    border: 2px solid blue;
+    border-radius: 8px;
+    height: 45px;
+    width: 45px;
+    background: linear-gradient(aquamarine, cyan);
+}
+.block:hover {
+    transition: 0.4s;
+    border-radius: 15px;
+    background: linear-gradient(greenyellow, rgb(117, 164, 117));
+    border: 2px solid green;
+}
