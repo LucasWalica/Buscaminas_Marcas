@@ -22,7 +22,6 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log(mapa);
 
 
-
     let countMinas =50;
     let countMinasRow = 5;
     var grid = document.querySelector('.grid');
