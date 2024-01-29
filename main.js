@@ -35,17 +35,16 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    loadMapValues();
     console.log(mapa);
     // generar grid
     let button = document.getElementById("generate");
     button.addEventListener('click', function(){
         
-
         var grid = document.querySelector('.grid');
         
+    
         
-        
+        loadMapValues();
         console.log("Minas juego: ",minasJuego)
 
         // cargado el grid con elementos y clases 0 y 1
@@ -65,9 +64,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 block.addEventListener('click', function(){
                     click(block, i, j);
                 });
-                // testing
-                let test = contar(i, j)
-                block.innerHTML=test;
+                
                 grid.append(block);
             }
         }
@@ -108,19 +105,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
             let minasCercanas = contar(i, j);
             block.innerHTML=minasCercanas;
-
-            for(let x = Math.max(0, i-1); x<=Math.min(9, i+1); x++){
-                for(let y=Math.max(0, j-1); y<=Math.min(9, j+1); y++){
-                    if(mapa[x][y]!=1){
-                        // mejorar para colorear los alrededores de blanco
-                        block.classList.add('white');
-                    }
-                }
-            }
+            block.classList.add('white');
         }
     }
  
-
     // si clase 1=> Al pulsar mostrar mina y quitar una vida
     // si clase 0=> Al pulsar banderita y mostrar numeros?
 
