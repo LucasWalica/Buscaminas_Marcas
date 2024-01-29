@@ -65,3 +65,22 @@ h2{
 .noMina{
     background-color: green!important;
 }
+
+#inputs {
+    border: 2px solid black;
+    border-radius: 20px;
+    padding: 10px;
+    width: 140px;
+    background: linear-gradient(greenyellow, green);
+}
+#buttons{
+    border: 2px solid black;
+    padding: 20px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-around;
+}
+
+input{
+    width: 50px;
+}

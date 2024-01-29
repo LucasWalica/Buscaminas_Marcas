@@ -1,3 +1,8 @@
+function obtenerMinas(){
+    let inputMinas = document.getElementById('numMinas').value;
+    return inputMinas;
+}
+
 // cargando el mapa
 document.addEventListener('DOMContentLoaded', function() {    
     // valores del mapa
@@ -5,13 +10,17 @@ document.addEventListener('DOMContentLoaded', function() {
     let minasJuego = 0;
     let vidasJugador = 10;
 
-    function loadMapValues(){
 
+    // mejorar para que pueda ingresar un numero de minas a generar 
+    // y que se generen de una forma equitativa en todo el tablero
+    function loadMapValues(inputMinas){
+    
         for(let i=0; i<10; i++){
             let row = [];
             for(let j=0; j<10; j++){
                 let content = Math.round(Math.random()*3);
-                if(content===1){minasJuego++;}
+                if(content===1 && inputMinas>0){minasJuego++; inputMinas--;}
+                else if(content===1 && inputMinas===0){content=0;}
                 row.push(content);
             }
             mapa.push(row);
@@ -20,44 +29,51 @@ document.addEventListener('DOMContentLoaded', function() {
     loadMapValues();
 
     console.log(mapa);
+    // generar grid
+    let button = document.getElementById("generate");
+    button.addEventListener('click', function(){
+   
+        let countMinas =obtenerMinas();
+        let countMinasRow = 5;
+        
+        
+        var grid = document.querySelector('.grid');
+        
+        
+        console.log("Minas juego: ",minasJuego)
 
-
-
-    let countMinas =50;
-    let countMinasRow = 5;
-    var grid = document.querySelector('.grid');
-
-    console.log("Minas juego: ",minasJuego)
-
-    // cargado el grid con elementos y clases 0 y 1
-    for(let i=0; i<10; i++){
-        for(let j=0; j<10; j++){
-            let block = document.createElement('div');
-            block.classList.add('block');
             
-            if(mapa[i][j]==1 && countMinas>0 && countMinasRow>0){
-                block.classList.add('mina');
-                countMinas--; 
-                countMinasRow--;
+        // cargado el grid con elementos y clases 0 y 1
+        for(let i=0; i<10; i++){
+            for(let j=0; j<10; j++){
+                let block = document.createElement('div');
+                block.classList.add('block');
+                
+                if(mapa[i][j]===1 && countMinas>0 && countMinasRow>0){
+                    block.classList.add('mina');
+                    countMinas--; 
+                    countMinasRow--;
+                }
+                else if(mapa[i][j]===0 ||  mapa[i][j]===2 || mapa[i][j]===3 ||countMinas===0 || countMinasRow===0){
+                    block.classList.add('noMina');
+                }
+                // funcion de click
+                block.addEventListener('click', function(){
+                    click(block, i, j);
+                });
+                // testing
+                let test = contar(i, j)
+                block.innerHTML=test;
+                grid.append(block);
             }
-            else if(mapa[i][j]==0 ||  mapa[i][j]==2 || mapa[i][j] ==3 ||countMinas==0 || countMinasRow==0){
-                block.classList.add('noMina');
-            }
-            // funcion de click
-            block.addEventListener('click', function(){
-                click(block, i, j);
-            });
+            countMinasRow=3;
 
-            grid.append(block);
-        }
-        countMinasRow=3;
-
-    }
-    let minas_div = document.querySelector('#minas_count');
-    minas_div.innerHTML = minasJuego;
-    let vidas = document.querySelector('#vidasRestas');
-    vidas.innerHTML = vidasJugador;
-
+        }   
+        let minas_div = document.querySelector('#minas_count');
+        minas_div.innerHTML = minasJuego;
+        let vidas = document.querySelector('#vidasRestas');
+        vidas.innerHTML = vidasJugador;
+    })
 
     function contar(i,j){
         let count = 0;

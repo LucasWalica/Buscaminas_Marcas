@@ -15,10 +15,23 @@
             <center>
                 <h2>Buscaminas</h2>
                 <hr>
-                <br>
                 <div id="minasRestantes"><h4>Minas restantes:</h4><span id="minas_count"></span></div>
                 <br>
                 <div id="lifes"><h4>Vidas restantes:</h4><div id="vidasRestas"></div></div>
+                <br>
+                <div id="inputs">
+
+                    <div>
+                        <h5>Numero de minas </h5>
+                    </div>
+                    <div id="buttons">
+                        <div id="inputMinas">
+                            <input id="numMinas" type="number" step="10" min="10" max="80">
+                        </div>
+                        <div id="Generate"><button  id="generate" onclick='cargar()'>Generate</button></div>
+                    </div>
+
+                </div>
             </center>
         </div>
         <center>
