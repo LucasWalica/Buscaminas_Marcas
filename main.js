@@ -13,49 +13,53 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // mejorar para que pueda ingresar un numero de minas a generar 
     // y que se generen de una forma equitativa en todo el tablero
-    function loadMapValues(inputMinas){
-    
+    function loadMapValues(){
+        
+        let countMinas =obtenerMinas(); 
+        
+        console.log(countMinas);
+
         for(let i=0; i<10; i++){
             let row = [];
             for(let j=0; j<10; j++){
+                
                 let content = Math.round(Math.random()*3);
-                if(content===1 && inputMinas>0){minasJuego++; inputMinas--;}
-                else if(content===1 && inputMinas===0){content=0;}
+
+                if(content===1 && countMinas>0){minasJuego++; countMinas--;}
+                
+                else if(content===1 && countMinas===0){content=0;}
+
                 row.push(content);
             }
             mapa.push(row);
         }
     }
-    loadMapValues();
 
+    loadMapValues();
     console.log(mapa);
     // generar grid
     let button = document.getElementById("generate");
     button.addEventListener('click', function(){
-   
-        let countMinas =obtenerMinas();
-        let countMinasRow = 5;
         
-        
+
         var grid = document.querySelector('.grid');
+        
         
         
         console.log("Minas juego: ",minasJuego)
 
-            
         // cargado el grid con elementos y clases 0 y 1
         for(let i=0; i<10; i++){
             for(let j=0; j<10; j++){
                 let block = document.createElement('div');
                 block.classList.add('block');
                 
-                if(mapa[i][j]===1 && countMinas>0 && countMinasRow>0){
-                    block.classList.add('mina');
-                    countMinas--; 
-                    countMinasRow--;
+                if(mapa[i][j]===1){
+                    block.classList.add('mina'); 
                 }
-                else if(mapa[i][j]===0 ||  mapa[i][j]===2 || mapa[i][j]===3 ||countMinas===0 || countMinasRow===0){
+                else if(mapa[i][j]===0 ||  mapa[i][j]===2 || mapa[i][j]===3){
                     block.classList.add('noMina');
+                    
                 }
                 // funcion de click
                 block.addEventListener('click', function(){
@@ -66,13 +70,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 block.innerHTML=test;
                 grid.append(block);
             }
-            countMinasRow=3;
-
-        }   
+        }
+           
         let minas_div = document.querySelector('#minas_count');
-        minas_div.innerHTML = minasJuego;
+        minas_div.innerHTML =  obtenerMinas();
+
         let vidas = document.querySelector('#vidasRestas');
         vidas.innerHTML = vidasJugador;
+
+
     })
 
     function contar(i,j){
@@ -87,16 +93,33 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         return count;
     }    
+    
 
     // funcion click
     function click(block, i, j){
+
         if(block.classList.contains('mina')){
-            alert("mina");
+            
+            vidasJugador--;
+            let vidas = document.querySelector('#vidasRestas');
+            vidas.innerHTML = vidasJugador;
+        
         }else if(block.classList.contains('noMina')){
+
             let minasCercanas = contar(i, j);
             block.innerHTML=minasCercanas;
+
+            for(let x = Math.max(0, i-1); x<=Math.min(9, i+1); x++){
+                for(let y=Math.max(0, j-1); y<=Math.min(9, j+1); y++){
+                    if(mapa[x][y]!=1){
+                        // mejorar para colorear los alrededores de blanco
+                        block.classList.add('white');
+                    }
+                }
+            }
         }
     }
+ 
 
     // si clase 1=> Al pulsar mostrar mina y quitar una vida
     // si clase 0=> Al pulsar banderita y mostrar numeros?
