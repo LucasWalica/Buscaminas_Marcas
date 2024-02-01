@@ -61,7 +61,8 @@ h2{
 }
 
 .mina {
-    background-color: red!important;
+    background: red!important;
+    background-color: green!important;
 }
 .noMina{
     background-color: green!important;
@@ -71,22 +72,59 @@ h2{
     border: 2px solid black;
     border-radius: 20px;
     padding: 10px;
-    width: 140px;
     background: linear-gradient(greenyellow, green);
 }
 #buttons{
     border: 2px solid black;
     padding: 20px;
     border-radius: 20px;
-    display: flex;
-    justify-content: space-around;
+}
+button{
+    border: 2px solid brown;
+    border-radius: 25px;
+    padding: 10px;
+    margin-top: 5px;
+    background: linear-gradient(brown, red);
+    color: black;
+    text-shadow: 2px 2px 2px white;
+}
+button:hover{
+    padding-left: 15px;
+    padding-right: 15px;
+    transition: 0.4s;
 }
 
 input{
     width: 50px;
+    margin: 2px;
 }
 
-.white {
-    background: linear-gradient(white, grey)!important;
+.bandera {
+    background: url('./bander.png') no-repeat center;
+    color: white;
+    text-shadow: 2px 2px 2px black;
+}
+.explosion{
+    background: url('./Explosion (2).png');
+    animation: exp 0.9s steps(6);
+}
+.minaLimpiada{
+    background: linear-gradient(green, greenyellow);
+}
+@keyframes exp {
+    from{background-position: 0px;}
+    to{background-position: -270px;}
+}
 
+h5{
+    border: 2px solid black;
+    border-radius: 5px;
+    background: linear-gradient(rgb(53, 83, 8), rgb(68, 22, 6));
+    color: white;
+    text-shadow: 2px 2px 2px black;
+}
+
+#containerHelp{
+    display: flex;
+    justify-content: flex;
 }
