@@ -55,7 +55,6 @@ h2{
 .block:hover {
     transition: 0.4s;
     border-radius: 15px;
-    background: linear-gradient(greenyellow, rgb(117, 164, 117));
     border: 2px solid green;
     cursor: pointer;
 }

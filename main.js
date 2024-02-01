@@ -100,6 +100,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 vidasJugador--;
                 let vidas = document.querySelector('#vidasRestas');
                 vidas.innerHTML = vidasJugador;
+                block.classList.remove('mina');
                 block.classList.add('explosion');
             }
             else if(vidasJugador===0){
@@ -118,7 +119,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // desactivar mina
     document.body.addEventListener("mousedown", event=>{
         if(event.button===2){
-            if(event.target.classList.contains("mina")){
+            if(event.target.classList.contains("mina") || event.target.classList.contains("explosion")){
+                    event.target.classList.remove('mina');                
                     event.target.classList.add("minaLimpiada")
                     minas_div = document.querySelector('#minas_count');
                     countMinas--;
